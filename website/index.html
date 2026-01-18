@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MenoX - AI Text Assistant for macOS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">MenoX</div>
+            <nav class="nav">
+                <a href="#features">Features</a>
+                <a href="#download">Download</a>
+                <a href="#docs">Docs</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">AI Text Assistant<br>for macOS</h1>
+            <p class="hero-subtitle">Select any text, press Cmd+`, and get instant AI-powered suggestions with multiple variations.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">Download for macOS</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+            <div class="hero-image">
+                <div class="app-window">
+                    <div class="window-header">
+                        <div class="window-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <!-- Chat Section -->
+                        <div class="chat-section">
+                            <div class="ai-message">
+                                <div class="ai-avatar">✨</div>
+                                <div class="message-content">
+                                    <div class="message-sender">AI Assistant</div>
+                                    <div class="message-text">I can help you with the selected text. What would you like me to do?</div>
+                                    <div class="message-time">9:32 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="user-message">
+                                <div class="message-content">
+                                    <div class="message-text">Can you make this email more professional and add a polite closing?</div>
+                                    <div class="message-time">9:32 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-message">
+                                <div class="ai-avatar">✨</div>
+                                <div class="message-content">
+                                    <div class="message-sender">AI Assistant</div>
+                                    <div class="message-text">I've created three professional versions of your email with polite closings. Each option maintains a respectful tone while clearly communicating your message. You can see them in the options below - click to copy or use "Replace Selected Text" to update your original email.</div>
+                                    <div class="message-time">9:33 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="user-message">
+                                <div class="message-content">
+                                    <div class="message-text">Perfect! Can you also suggest a good subject line?</div>
+                                    <div class="message-time">9:33 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-message">
+                                <div class="ai-avatar">✨</div>
+                                <div class="message-content">
+                                    <div class="message-sender">AI Assistant</div>
+                                    <div class="message-text">Here are three subject line options:<br><br>
+                                    1. "Meeting Request: Project Timeline Discussion"<br>
+                                    2. "Follow-up: Tomorrow's Project Meeting"<br>
+                                    3. "Scheduling Discussion for Project Next Steps"<br><br>
+                                    The first option is the most direct and professional.</div>
+                                    <div class="message-time">9:33 PM</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Section -->
+                        <div class="input-section">
+                            <input type="text" placeholder="Ask about the selected text..." readonly>
+                            <button class="send-btn">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M2 10L18 2L10 18L8 11L2 10Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="quick-actions">
+                            <button class="action-btn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 11l3 3L22 4"/>
+                                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                                </svg>
+                                Improve Writing
+                            </button>
+                            <button class="action-btn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    <path d="M9 9h6M9 15h6"/>
+                                </svg>
+                                Make Professional
+                            </button>
+                            <button class="more-btn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="1"/>
+                                    <circle cx="12" cy="5" r="1"/>
+                                    <circle cx="12" cy="19" r="1"/>
+                                </svg>
+                                <span>More</span>
+                            </button>
+                        </div>
+
+                        <!-- AI Variations -->
+                        <div class="variations-section">
+                            <div class="variation-card">
+                                <div class="variation-icon">📄</div>
+                                <div class="variation-label">Option 1</div>
+                                <div class="variation-text">Would you be available to meet tomorrow? I'd like to discuss the project timeline and next steps.</div>
+                                <div class="variation-actions">
+                                    <button class="copy-btn">Copy</button>
+                                    <button class="replace-btn">Replace Selected Text</button>
+                                </div>
+                            </div>
+                            <div class="variation-card">
+                                <div class="variation-icon">📄</div>
+                                <div class="variation-label">Option 2</div>
+                                <div class="variation-text">I'd like to schedule a meeting for tomorrow. Please let me know what time works best for you.</div>
+                                <div class="variation-actions">
+                                    <button class="copy-btn">Copy</button>
+                                    <button class="replace-btn">Replace Selected Text</button>
+                                </div>
+                            </div>
+                            <div class="variation-card">
+                                <div class="variation-icon">📄</div>
+                                <div class="variation-label">Option 3</div>
+                                <div class="variation-text">Let's arrange a meeting for tomorrow to go over the details. Looking forward to connecting!</div>
+                                <div class="variation-actions">
+                                    <button class="copy-btn">Copy</button>
+                                    <button class="replace-btn">Replace Selected Text</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            
+            <div class="feature-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">⌨️</div>
+                    <h3>Global Hotkey</h3>
+                    <p>Press <code>Cmd+`</code> anywhere to trigger the AI assistant with your selected text.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Multiple AI Models</h3>
+                    <p>Choose from Claude, Llama, Titan, and other AWS Bedrock models.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Three Variations</h3>
+                    <p>Get 3 different AI-generated options for every request instantly.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Replace Text</h3>
+                    <p>Click to copy or use "Replace Selected Text" to update your original text.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Chat Interface</h3>
+                    <p>Have a conversation with AI about your selected text.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎛️</div>
+                    <h3>Custom Actions</h3>
+                    <p>Create up to 4 custom quick actions with your own prompts.</p>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure Storage</h3>
+                    <p>Optional Keychain storage for encrypted API key protection.</p>
+                </div>
+
+                <!-- Feature 8 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Menu Bar Only</h3>
+                    <p>Runs silently in the background, no dock icon cluttering your workspace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Select Text</h3>
+                    <p>Highlight any text in any application</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Press Cmd+`</h3>
+                    <p>Trigger the floating panel instantly</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Suggestions</h3>
+                    <p>View 3 AI-generated variations</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Use or Replace</h3>
+                    <p>Copy or replace your original text</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">Download MenoX</h2>
+            <div class="download-card">
+                <div class="download-info">
+                    <h3>MenoX v1.0</h3>
+                    <p>For macOS 13.0 (Ventura) or later</p>
+                    <ul class="download-features">
+                        <li>✓ Apple Silicon (M1/M2/M3) & Intel</li>
+                        <li>✓ Notarized by Apple</li>
+                        <li>✓ Open Source (MIT License)</li>
+                    </ul>
+                </div>
+                <div class="download-actions">
+                    <a href="https://github.com/yourusername/menox/releases" class="btn btn-primary btn-large">
+                        Download DMG
+                    </a>
+                    <p class="download-note">2.0 MB • Free & Open Source</p>
+                </div>
+            </div>
+            
+            <div class="requirements">
+                <h4>Requirements</h4>
+                <ul>
+                    <li>macOS 13.0 (Ventura) or later</li>
+                    <li>AWS account with Bedrock access</li>
+                    <li>Internet connection</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MenoX</h4>
+                    <p>AI Text Assistant for macOS</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="https://github.com/yourusername/menox">GitHub</a>
+                    <a href="#docs">Documentation</a>
+                    <a href="#download">Download</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="https://github.com/yourusername/menox/issues">Report Issue</a>
+                    <a href="#docs">User Guide</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 MenoX. Open Source under MIT License.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

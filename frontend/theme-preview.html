@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MenoX - Day Theme Options</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .theme-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .theme-option {
+            border: 3px solid transparent;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .theme-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-color: #007AFF;
+        }
+        
+        .theme-header {
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        .theme-preview {
+            padding: 30px 20px;
+            min-height: 300px;
+        }
+        
+        .preview-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid currentColor;
+            opacity: 0.8;
+        }
+        
+        .preview-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .preview-links {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+        
+        .preview-hero {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .preview-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .preview-subtitle {
+            font-size: 18px;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+        
+        .preview-button {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .preview-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .theme-name {
+            text-align: center;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 16px;
+            background: rgba(0,0,0,0.05);
+        }
+        
+        /* Night Theme (Current) */
+        .theme-night .theme-header {
+            background: #1a1a1a;
+            color: #ff6b35;
+        }
+        .theme-night .theme-preview {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+        .theme-night .preview-button {
+            background: #ff6b35;
+            color: #ffffff;
+        }
+        .theme-night .theme-name {
+            background: #1a1a1a;
+            color: #ff6b35;
+        }
+        
+        /* Option 1: Sky Blue & Coral */
+        .theme-sky .theme-header {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .theme-sky .theme-preview {
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            color: #1a1a1a;
+        }
+        .theme-sky .preview-button {
+            background: #ff6b6b;
+            color: #ffffff;
+        }
+        .theme-sky .theme-name {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        /* Option 2: Mint Green & Teal */
+        .theme-mint .theme-header {
+            background: #e0f7f4;
+            color: #00897b;
+        }
+        .theme-mint .theme-preview {
+            background: linear-gradient(135deg, #f0fffe 0%, #ffffff 100%);
+            color: #1a1a1a;
+        }
+        .theme-mint .preview-button {
+            background: #00897b;
+            color: #ffffff;
+        }
+        .theme-mint .theme-name {
+            background: #e0f7f4;
+            color: #00897b;
+        }
+        
+        /* Option 3: Warm Beige & Brown */
+        .theme-warm .theme-header {
+            background: #fff8e1;
+            color: #6d4c41;
+        }
+        .theme-warm .theme-preview {
+            background: linear-gradient(135deg, #fffbf0 0%, #ffffff 100%);
+            color: #3e2723;
+        }
+        .theme-warm .preview-button {
+            background: #ff8a65;
+            color: #ffffff;
+        }
+        .theme-warm .theme-name {
+            background: #fff8e1;
+            color: #6d4c41;
+        }
+        
+        /* Option 4: Lavender & Purple */
+        .theme-lavender .theme-header {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        .theme-lavender .theme-preview {
+            background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
+            color: #1a1a1a;
+        }
+        .theme-lavender .preview-button {
+            background: #ab47bc;
+            color: #ffffff;
+        }
+        .theme-lavender .theme-name {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        /* Option 5: White & Light Blue */
+        .theme-silver .theme-header {
+            background: #f0f8ff;
+            color: #4a90e2;
+            border-bottom: 1px solid #d6ebff;
+        }
+        .theme-silver .theme-preview {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+            color: #2c3e50;
+        }
+        .theme-silver .preview-button {
+            background: #5dade2;
+            color: #ffffff;
+        }
+        .theme-silver .preview-subtitle {
+            color: #5a6c7d;
+        }
+        .theme-silver .theme-name {
+            background: #f0f8ff;
+            color: #4a90e2;
+        }
+        
+        .page-title {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .page-title h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .page-title p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .current-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-title">
+        <h1>MenoX Day Theme Options</h1>
+        <p>Choose your preferred daytime color scheme (6 AM - 6 PM PST)</p>
+    </div>
+    
+    <div class="theme-container">
+        <!-- Current Night Theme -->
+        <div class="theme-option theme-night">
+            <div class="theme-header">
+                Current Night Theme <span class="current-badge">CURRENT</span>
+            </div>
+            <div class="theme-preview">
+                <div class="preview-nav">
+                    <div class="preview-logo">MenoX</div>
+                    <div class="preview-links">
+                        <span>Features</span>
+                        <span>Download</span>
+                    </div>
+                </div>
+                <div class="preview-hero">
+                    <div class="preview-title">AI Text Assistant<br>for macOS</div>
+                    <div class="preview-subtitle">Select text, press Cmd+`, get instant AI suggestions</div>
+                    <a href="#" class="preview-button">Download for macOS</a>
+                </div>
+            </div>
+            <div class="theme-name">Black & Orange (Night: 6 PM - 6 AM)</div>
+        </div>
+        
+        <!-- Option 1: Sky Blue & Coral -->
+        <div class="theme-option theme-sky">
+            <div class="theme-header">
+                Option 1: Sky Blue & Coral
+            </div>
+            <div class="theme-preview">
+                <div class="preview-nav">
+                    <div class="preview-logo">MenoX</div>
+                    <div class="preview-links">
+                        <span>Features</span>
+                        <span>Download</span>
+                    </div>
+                </div>
+                <div class="preview-hero">
+                    <div class="preview-title">AI Text Assistant<br>for macOS</div>
+                    <div class="preview-subtitle">Select text, press Cmd+`, get instant AI suggestions</div>
+                    <a href="#" class="preview-button">Download for macOS</a>
+                </div>
+            </div>
+            <div class="theme-name">Fresh & Energetic (Morning)</div>
+        </div>
+        
+        <!-- Option 2: Mint Green & Teal -->
+        <div class="theme-option theme-mint">
+            <div class="theme-header">
+                Option 2: Mint Green & Teal
+            </div>
+            <div class="theme-preview">
+                <div class="preview-nav">
+                    <div class="preview-logo">MenoX</div>
+                    <div class="preview-links">
+                        <span>Features</span>
+                        <span>Download</span>
+                    </div>
+                </div>
+                <div class="preview-hero">
+                    <div class="preview-title">AI Text Assistant<br>for macOS</div>
+                    <div class="preview-subtitle">Select text, press Cmd+`, get instant AI suggestions</div>
+                    <a href="#" class="preview-button">Download for macOS</a>
+                </div>
+            </div>
+            <div class="theme-name">Calm & Professional (Morning)</div>
+        </div>
+        
+        <!-- Option 3: Warm Beige & Brown -->
+        <div class="theme-option theme-warm">
+            <div class="theme-header">
+                Option 3: Warm Beige & Brown
+            </div>
+            <div class="theme-preview">
+                <div class="preview-nav">
+                    <div class="preview-logo">MenoX</div>
+                    <div class="preview-links">
+                        <span>Features</span>
+                        <span>Download</span>
+                    </div>
+                </div>
+                <div class="preview-hero">
+                    <div class="preview-title">AI Text Assistant<br>for macOS</div>
+                    <div class="preview-subtitle">Select text, press Cmd+`, get instant AI suggestions</div>
+                    <a href="#" class="preview-button">Download for macOS</a>
+                </div>
+            </div>
+            <div class="theme-name">Cozy & Inviting (Morning)</div>
+        </div>
+        
+        <!-- Option 4: Lavender & Purple -->
+        <div class="theme-option theme-lavender">
+            <div class="theme-header">
+                Option 4: Lavender & Purple
+            </div>
+            <div class="theme-preview">
+                <div class="preview-nav">
+                    <div class="preview-logo">MenoX</div>
+                    <div class="preview-links">
+                        <span>Features</span>
+                        <span>Download</span>
+                    </div>
+                </div>
+                <div class="preview-hero">
+                    <div class="preview-title">AI Text Assistant<br>for macOS</div>
+                    <div class="preview-subtitle">Select text, press Cmd+`, get instant AI suggestions</div>
+                    <a href="#" class="preview-button">Download for macOS</a>
+                </div>
+            </div>
+            <div class="theme-name">Creative & Modern (Morning)</div>
+        </div>
+        
+        <!-- Option 5: White & Light Blue -->
+        <div class="theme-option theme-silver">
+            <div class="theme-header">
+                Option 5: White & Light Blue
+            </div>
+            <div class="theme-preview">
+                <div class="preview-nav">
+                    <div class="preview-logo">MenoX</div>
+                    <div class="preview-links">
+                        <span>Features</span>
+                        <span>Download</span>
+                    </div>
+                </div>
+                <div class="preview-hero">
+                    <div class="preview-title">AI Text Assistant<br>for macOS</div>
+                    <div class="preview-subtitle">Select text, press Cmd+`, get instant AI suggestions</div>
+                    <a href="#" class="preview-button">Download for macOS</a>
+                </div>
+            </div>
+            <div class="theme-name">Clean & Light (Morning)</div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const themeName = this.querySelector('.theme-name').textContent;
+                alert('You selected: ' + themeName + '\n\nLet me know which option you prefer!');
+            });
+        });
+    </script>
+</body>
+</html>

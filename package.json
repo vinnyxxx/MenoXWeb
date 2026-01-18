@@ -1,0 +1,31 @@
+{
+  "name": "macos-app-website",
+  "version": "1.0.0",
+  "description": "专业的 macOS 应用发布网站",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "infrastructure"
+  ],
+  "scripts": {
+    "dev:frontend": "cd frontend && python3 -m http.server 8000",
+    "dev:backend": "cd backend && npm run dev",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write \"**/*.{js,ts,json,css,html,md}\"",
+    "deploy": "cd infrastructure && cdk deploy --all",
+    "deploy:frontend": "cd infrastructure && cdk deploy FrontendStack",
+    "deploy:backend": "cd infrastructure && cdk deploy BackendStack",
+    "destroy": "cd infrastructure && cdk destroy --all"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

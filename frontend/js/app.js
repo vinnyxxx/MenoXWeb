@@ -10,8 +10,23 @@ const API_BASE_URL = 'https://6wcydyo6tb.execute-api.us-west-2.amazonaws.com/pro
  * Apply theme based on visitor's local time
  * Day theme: 6 AM - 6 PM (local time)
  * Night theme: 6 PM - 6 AM (local time)
+ * Can be overridden with ?theme=day or ?theme=night URL parameter
  */
 function applyTimeBasedTheme() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const themeParam = urlParams.get('theme');
+    
+    // Allow URL parameter override for testing
+    if (themeParam === 'day') {
+        document.body.classList.add('day-theme');
+        console.log('Day theme forced via URL parameter');
+        return;
+    } else if (themeParam === 'night') {
+        document.body.classList.remove('day-theme');
+        console.log('Night theme forced via URL parameter');
+        return;
+    }
+    
     const now = new Date();
     const localHours = now.getHours();
     // Apply day theme between 6 AM and 6 PM local time

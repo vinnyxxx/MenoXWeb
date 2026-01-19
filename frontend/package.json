@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "Frontend static files",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "python3 -m http.server 8000",
     "build": "tsc",
     "watch": "tsc --watch",
-    "test": "jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules npx jest --watch",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage",
+    "test:unit": "NODE_OPTIONS=--experimental-vm-modules npx jest --testPathPattern=unit",
+    "test:property": "NODE_OPTIONS=--experimental-vm-modules npx jest --testPathPattern=property",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,ts,css,html}\""
   },

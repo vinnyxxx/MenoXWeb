@@ -1056,3 +1056,390 @@ html {
         position: static;
     }
 }
+
+
+/* ==========================================================================
+   Hero Animated Demo Styles
+   ========================================================================== */
+
+/* Hero Demo Container */
+.hero-demo {
+    position: relative;
+    display: flex;
+    gap: 24px;
+    margin-top: 40px;
+    align-items: flex-start;
+    max-height: 480px;
+}
+
+/* Text Editor (left side) */
+.demo-text-editor {
+    flex: 0 0 340px;
+    background: #2d2d2d;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+body.day-theme .demo-text-editor {
+    background: #ffffff;
+    box-shadow: 0 16px 48px rgba(74, 144, 226, 0.2);
+}
+
+.demo-editor-bar {
+    background: #1e1e1e;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.day-theme .demo-editor-bar {
+    background: #f0f8ff;
+    border-bottom: 1px solid #d6ebff;
+}
+
+.demo-editor-title {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: auto;
+}
+
+.demo-editor-body {
+    padding: 14px;
+}
+
+.demo-email-header {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.demo-email-field {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.demo-field-label {
+    color: var(--text-muted);
+    margin-right: 6px;
+}
+
+.demo-email-content {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.demo-email-content p {
+    margin-bottom: 8px;
+}
+
+/* Text Selection Animation */
+.demo-text-selection {
+    position: relative;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    padding: 1px 2px;
+    margin: -1px -2px;
+}
+
+.demo-text-selection.demo-text-selecting {
+    background: rgba(74, 158, 255, 0.3);
+}
+
+.demo-text-selection.demo-text-selected {
+    background: rgba(74, 158, 255, 0.3);
+}
+
+.demo-text-selection .demo-original-text {
+    display: inline;
+}
+
+.demo-text-selection .demo-replacement-text {
+    display: none;
+}
+
+.demo-text-selection.demo-text-replaced .demo-original-text {
+    display: none !important;
+}
+
+.demo-text-selection.demo-text-replaced .demo-replacement-text {
+    display: inline !important;
+    color: #22c55e;
+    font-weight: 500;
+}
+
+.demo-text-selection.demo-text-replaced {
+    background: rgba(34, 197, 94, 0.25);
+}
+
+.demo-text-selection.demo-text-replaced::after {
+    content: ' ✓';
+    color: #22c55e;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+@keyframes demo-select-text {
+    0% { background: transparent; }
+    100% { background: rgba(74, 158, 255, 0.3); }
+}
+
+/* Keyboard Indicator */
+.demo-keyboard-indicator {
+    position: absolute;
+    top: 35%;
+    left: 28%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+body.day-theme .demo-keyboard-indicator {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 10px 32px rgba(74, 144, 226, 0.3);
+}
+
+.demo-keyboard-indicator.demo-keyboard-visible {
+    opacity: 1;
+}
+
+.demo-key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 10px;
+    background: linear-gradient(180deg, #4a4a4a 0%, #3a3a3a 100%);
+    border: 1px solid #555;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 2px 0 #222, inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+body.day-theme .demo-key {
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    border: 1px solid #d0d0d0;
+    color: #333;
+    box-shadow: 0 2px 0 #ccc, inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.demo-key-plus {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.demo-keyboard-indicator.demo-keyboard-pressed .demo-key {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #222, inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* App Window in Demo */
+.hero-demo .demo-app-window {
+    flex: 1;
+    max-width: 520px;
+    opacity: 0;
+    transform: scale(0.95) translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-demo .demo-app-window.demo-app-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* Compact app window content */
+.hero-demo .demo-app-window .window-content {
+    padding: 12px;
+}
+
+.hero-demo .demo-app-window .chat-section {
+    min-height: auto;
+    max-height: 140px;
+    margin-bottom: 10px;
+}
+
+.hero-demo .demo-app-window .ai-message,
+.hero-demo .demo-app-window .user-message {
+    margin-bottom: 8px;
+}
+
+.hero-demo .demo-app-window .message-text {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.hero-demo .demo-app-window .input-section {
+    margin-bottom: 10px;
+}
+
+.hero-demo .demo-app-window .input-section input {
+    padding: 10px 40px 10px 12px;
+    font-size: 12px;
+}
+
+.hero-demo .demo-app-window .quick-actions {
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.hero-demo .demo-app-window .action-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+}
+
+.hero-demo .demo-app-window .more-btn {
+    padding: 8px 12px;
+    font-size: 11px;
+}
+
+.hero-demo .demo-app-window .variations-section {
+    gap: 8px;
+}
+
+.hero-demo .demo-app-window .variation-card {
+    padding: 10px;
+}
+
+.hero-demo .demo-app-window .variation-text {
+    font-size: 11px;
+    min-height: 36px;
+    margin-bottom: 8px;
+}
+
+.hero-demo .demo-app-window .variation-label {
+    font-size: 9px;
+    margin-bottom: 6px;
+}
+
+.hero-demo .demo-app-window .copy-btn,
+.hero-demo .demo-app-window .replace-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+}
+
+/* Animation states for chat elements */
+.demo-ai-greeting,
+.demo-ai-response {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.demo-ai-greeting.demo-visible,
+.demo-ai-response.demo-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Quick action animation */
+.demo-quick-action.demo-button-highlighted {
+    border-color: var(--accent-orange) !important;
+    background: rgba(255, 152, 0, 0.15) !important;
+    transform: scale(1.02);
+}
+
+.demo-quick-action.demo-button-pressed {
+    transform: scale(0.98);
+}
+
+.demo-quick-action.demo-button-loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.demo-quick-action.demo-button-loading svg {
+    opacity: 0;
+}
+
+.demo-quick-action.demo-button-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border: 2px solid var(--accent-orange);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: demo-spin 0.6s linear infinite;
+}
+
+@keyframes demo-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Variations animation */
+.demo-variations .variation-card {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.demo-variations.demo-variations-visible .variation-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.demo-variations.demo-variations-visible .demo-variation-1 { transition-delay: 0s; }
+.demo-variations.demo-variations-visible .demo-variation-2 { transition-delay: 0.1s; }
+.demo-variations.demo-variations-visible .demo-variation-3 { transition-delay: 0.2s; }
+
+/* Replace button animation */
+.demo-replace-btn.demo-button-highlighted {
+    background: var(--accent-orange) !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+}
+
+.demo-replace-btn.demo-button-pressed {
+    transform: scale(0.95);
+}
+
+/* Make variation actions visible when variations are shown */
+.demo-variations.demo-variations-visible .variation-card .variation-actions {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .hero-demo {
+        flex-direction: column;
+        align-items: center;
+        max-height: none;
+    }
+    
+    .demo-text-editor {
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .hero-demo .demo-app-window {
+        max-width: 100%;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .demo-keyboard-indicator {
+        left: 50%;
+    }
+}

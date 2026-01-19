@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MenoX - AI Text Assistant for macOS</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="src/animated-demo/animated-demo.css">
 </head>
 <body>
     <!-- Header -->
@@ -28,8 +29,39 @@
                 <a href="#download" class="btn btn-primary">Download for macOS</a>
                 <a href="#features" class="btn btn-secondary">Learn More</a>
             </div>
-            <div class="hero-image">
-                <div class="app-window">
+            
+            <!-- Animated Demo Area -->
+            <div class="hero-demo" data-demo-animation="true">
+                <!-- Text Editor (left side - simulates any app) -->
+                <div class="demo-text-editor">
+                    <div class="demo-editor-bar">
+                        <div class="window-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="demo-editor-title">Email Draft — Mail</span>
+                    </div>
+                    <div class="demo-editor-body">
+                        <div class="demo-email-header">
+                            <div class="demo-email-field"><span class="demo-field-label">To:</span> team@company.com</div>
+                            <div class="demo-email-field"><span class="demo-field-label">Subject:</span> Project Update</div>
+                        </div>
+                        <div class="demo-email-content">
+                            <p>Hi Team,</p>
+                            <p>Here's the update. <span class="demo-text-selection" data-animation-target="text-selection"><span class="demo-original-text">Send me the report ASAP.</span><span class="demo-replacement-text">Could you please send me the report at your earliest convenience?</span></span></p>
+                            <p>Thanks</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keyboard Indicator (floats over) -->
+                <div class="demo-keyboard-indicator" data-animation-target="keyboard-indicator">
+                    <span class="demo-key">⌘</span>
+                    <span class="demo-key-plus">+</span>
+                    <span class="demo-key">`</span>
+                </div>
+
+                <!-- MenoX App Window (right side - the actual app) -->
+                <div class="app-window demo-app-window" data-animation-target="app-window">
                     <div class="window-header">
                         <div class="window-dots">
                             <span></span><span></span><span></span>
@@ -38,7 +70,7 @@
                     <div class="window-content">
                         <!-- Chat Section -->
                         <div class="chat-section">
-                            <div class="ai-message">
+                            <div class="ai-message demo-ai-greeting" data-animation-target="ai-greeting">
                                 <div class="ai-avatar">✨</div>
                                 <div class="message-content">
                                     <div class="message-sender">AI Assistant</div>
@@ -47,18 +79,11 @@
                                 </div>
                             </div>
                             
-                            <div class="user-message">
-                                <div class="message-content">
-                                    <div class="message-text">Can you make this email more professional and add a polite closing?</div>
-                                    <div class="message-time">9:32 PM</div>
-                                </div>
-                            </div>
-                            
-                            <div class="ai-message">
+                            <div class="ai-message demo-ai-response" data-animation-target="ai-response">
                                 <div class="ai-avatar">✨</div>
                                 <div class="message-content">
                                     <div class="message-sender">AI Assistant</div>
-                                    <div class="message-text">I've created three professional versions of your email with polite closings. Each option maintains a respectful tone while clearly communicating your message.</div>
+                                    <div class="message-text">Here are three polite alternatives for your message:</div>
                                     <div class="message-time">9:33 PM</div>
                                 </div>
                             </div>
@@ -76,7 +101,7 @@
 
                         <!-- Quick Actions -->
                         <div class="quick-actions">
-                            <button class="action-btn">
+                            <button class="action-btn demo-quick-action" data-animation-target="quick-action">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M9 11l3 3L22 4"/>
                                     <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
@@ -101,32 +126,32 @@
                         </div>
 
                         <!-- AI Variations -->
-                        <div class="variations-section">
-                            <div class="variation-card">
+                        <div class="variations-section demo-variations" data-animation-target="variations">
+                            <div class="variation-card demo-variation-1" data-animation-target="variation-1">
                                 <div class="variation-icon">📄</div>
                                 <div class="variation-label">Option 1</div>
-                                <div class="variation-text">Would you be available to meet tomorrow? I'd like to discuss the project timeline and next steps.</div>
+                                <div class="variation-text">Could you please send me the report at your earliest convenience?</div>
                                 <div class="variation-actions">
                                     <button class="copy-btn">Copy</button>
-                                    <button class="replace-btn">Replace Text</button>
+                                    <button class="replace-btn demo-replace-btn" data-animation-target="replace-btn">Replace</button>
                                 </div>
                             </div>
-                            <div class="variation-card">
+                            <div class="variation-card demo-variation-2" data-animation-target="variation-2">
                                 <div class="variation-icon">📄</div>
                                 <div class="variation-label">Option 2</div>
-                                <div class="variation-text">I'd like to schedule a meeting for tomorrow. Please let me know what time works best for you.</div>
+                                <div class="variation-text">When you have a moment, could you share the report with me?</div>
                                 <div class="variation-actions">
                                     <button class="copy-btn">Copy</button>
-                                    <button class="replace-btn">Replace Text</button>
+                                    <button class="replace-btn">Replace</button>
                                 </div>
                             </div>
-                            <div class="variation-card">
+                            <div class="variation-card demo-variation-3" data-animation-target="variation-3">
                                 <div class="variation-icon">📄</div>
                                 <div class="variation-label">Option 3</div>
-                                <div class="variation-text">Let's arrange a meeting for tomorrow to go over the details. Looking forward to connecting!</div>
+                                <div class="variation-text">I'd appreciate it if you could send the report when possible.</div>
                                 <div class="variation-actions">
                                     <button class="copy-btn">Copy</button>
-                                    <button class="replace-btn">Replace Text</button>
+                                    <button class="replace-btn">Replace</button>
                                 </div>
                             </div>
                         </div>
@@ -170,38 +195,6 @@
                     <div class="feature-icon">🔐</div>
                     <h3>Secure Storage</h3>
                     <p>Optional Keychain storage for encrypted API key protection.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Select Text</h3>
-                    <p>Highlight any text in any application</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Press Cmd+`</h3>
-                    <p>Trigger the floating panel instantly</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Get Suggestions</h3>
-                    <p>View 3 AI-generated variations</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Use or Replace</h3>
-                    <p>Copy or replace your original text</p>
                 </div>
             </div>
         </div>
@@ -297,5 +290,6 @@
     </footer>
 
     <script src="js/app.js"></script>
+    <script src="src/animated-demo/animated-demo-bundle.js"></script>
 </body>
 </html>

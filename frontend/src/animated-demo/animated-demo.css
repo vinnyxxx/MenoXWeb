@@ -1,0 +1,380 @@
+/**
+ * Animated Demo Stylesheet
+ * 
+ * CSS animations for the MenoX demo feature.
+ * Uses GPU-accelerated properties only (transform, opacity).
+ * Supports prefers-reduced-motion for accessibility.
+ */
+
+/* ==========================================================================
+   CSS Custom Properties (Timing)
+   ========================================================================== */
+
+:root {
+  /* Text selection timing */
+  --demo-selection-duration: 600ms;
+  --demo-selection-pause: 1000ms;
+  
+  /* Keyboard shortcut timing */
+  --demo-keyboard-press-duration: 300ms;
+  --demo-keyboard-fade-duration: 200ms;
+  
+  /* App window timing */
+  --demo-app-appear-duration: 400ms;
+  --demo-app-pause: 800ms;
+  
+  /* Button timing */
+  --demo-button-click-duration: 200ms;
+  --demo-button-loading-duration: 500ms;
+  
+  /* Text replacement timing */
+  --demo-text-fade-duration: 300ms;
+  --demo-success-duration: 800ms;
+  
+  /* Loop timing */
+  --demo-loop-delay: 2000ms;
+  --demo-reset-duration: 400ms;
+  
+  /* Easing functions */
+  --demo-ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --demo-ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+/* ==========================================================================
+   Demo Window Container
+   ========================================================================== */
+
+.demo-window {
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   Text Selection Animation
+   ========================================================================== */
+
+.demo-text-selection {
+  position: relative;
+  display: inline;
+}
+
+.demo-text-selection::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background-color: rgba(59, 130, 246, 0.3);
+  border-radius: 2px;
+  opacity: 0;
+  will-change: right, opacity;
+  transition: none;
+}
+
+/* Selecting state - animates left to right */
+.demo-text-selecting::after {
+  animation: demo-selection-expand var(--demo-selection-duration) var(--demo-ease-out) forwards;
+}
+
+/* Selected state - maintains selection */
+.demo-text-selected::after {
+  right: 0;
+  opacity: 1;
+}
+
+@keyframes demo-selection-expand {
+  0% {
+    right: 100%;
+    opacity: 1;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Keyboard Indicator Animation
+   ========================================================================== */
+
+.demo-keyboard-indicator {
+  opacity: 0;
+  transform: scale(0.9) translateY(4px);
+  will-change: transform, opacity;
+  transition: none;
+}
+
+/* Visible state */
+.demo-keyboard-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 150ms var(--demo-ease-out),
+              transform 150ms var(--demo-ease-out);
+}
+
+/* Pressed state - subtle scale down */
+.demo-keyboard-pressed {
+  animation: demo-key-press var(--demo-keyboard-press-duration) var(--demo-ease-in-out);
+}
+
+@keyframes demo-key-press {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(0.95) translateY(2px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Fade out after press */
+.demo-keyboard-indicator.demo-fade-out {
+  animation: demo-fade-out var(--demo-keyboard-fade-duration) var(--demo-ease-out) forwards;
+}
+
+/* ==========================================================================
+   App Window Animation
+   ========================================================================== */
+
+.demo-app-window {
+  opacity: 0;
+  transform: scale(0.8);
+  will-change: transform, opacity;
+  transition: none;
+}
+
+/* Entering state - scale and fade in */
+.demo-app-entering {
+  animation: demo-app-enter var(--demo-app-appear-duration) var(--demo-ease-out) forwards;
+}
+
+/* Visible state */
+.demo-app-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes demo-app-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   Quick Action Button Animation
+   ========================================================================== */
+
+.demo-quick-action {
+  will-change: transform, opacity;
+  transition: transform 150ms var(--demo-ease-out);
+}
+
+/* Highlighted state */
+.demo-button-highlighted {
+  transform: scale(1.02);
+}
+
+/* Pressed state */
+.demo-button-pressed {
+  animation: demo-button-press var(--demo-button-click-duration) var(--demo-ease-in-out);
+}
+
+@keyframes demo-button-press {
+  0% {
+    transform: scale(1.02);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Loading state */
+.demo-button-loading {
+  position: relative;
+}
+
+.demo-button-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: demo-spinner 600ms linear infinite;
+  will-change: transform;
+}
+
+@keyframes demo-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Text Replacement Animation - Handled by styles.css
+   ========================================================================== */
+
+/* Success indicator */
+.demo-success {
+  position: relative;
+}
+
+.demo-success::after {
+  content: '✓';
+  position: absolute;
+  right: -24px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  color: #22c55e;
+  font-size: 18px;
+  animation: demo-success-pop var(--demo-success-duration) var(--demo-ease-out) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes demo-success-pop {
+  0% {
+    transform: translateY(-50%) scale(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-50%) scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Shared Animation Utilities
+   ========================================================================== */
+
+@keyframes demo-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes demo-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Scale animation utility */
+.demo-scale-in {
+  animation: demo-scale-in 300ms var(--demo-ease-out) forwards;
+}
+
+@keyframes demo-scale-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Support (Accessibility)
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --demo-selection-duration: 0ms;
+    --demo-keyboard-press-duration: 0ms;
+    --demo-keyboard-fade-duration: 0ms;
+    --demo-app-appear-duration: 0ms;
+    --demo-button-click-duration: 0ms;
+    --demo-button-loading-duration: 0ms;
+    --demo-text-fade-duration: 0ms;
+    --demo-success-duration: 0ms;
+    --demo-reset-duration: 0ms;
+  }
+  
+  .demo-text-selection::after,
+  .demo-keyboard-indicator,
+  .demo-app-window,
+  .demo-quick-action,
+  .demo-replacement-text {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Show final states immediately */
+  .demo-text-selected::after {
+    right: 0;
+    opacity: 1;
+  }
+  
+  .demo-keyboard-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  
+  .demo-app-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .demo-text-replaced {
+    opacity: 1;
+  }
+  
+  /* Disable spinner animation */
+  .demo-button-loading::after {
+    animation: none;
+    border-color: currentColor;
+    border-radius: 50%;
+  }
+}
+
+/* ==========================================================================
+   No-JavaScript Fallback
+   ========================================================================== */
+
+.demo-window.no-js .demo-text-selection::after {
+  right: 0;
+  opacity: 1;
+}
+
+.demo-window.no-js .demo-app-window {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.demo-window.no-js .demo-replacement-text {
+  opacity: 1;
+}

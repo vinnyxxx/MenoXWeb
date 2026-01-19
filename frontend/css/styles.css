@@ -18,18 +18,18 @@
     --shadow: rgba(0, 0, 0, 0.3);
 }
 
-/* Day Theme (6 AM - 6 PM PST) - White & Light Blue */
+/* Day Theme (6 AM - 6 PM PST) - White background, black text */
 body.day-theme {
-    --bg-dark: #f0f8ff;
+    --bg-dark: #f5f5f5;
     --bg-darker: #ffffff;
-    --bg-light: #f8fbff;
-    --text-primary: #2c3e50;
-    --text-secondary: #5a6c7d;
-    --text-muted: #95a5a6;
-    --accent-orange: #5dade2;
+    --bg-light: #fafafa;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #888888;
+    --accent-orange: #ff9800;
     --accent-blue: #4a90e2;
-    --border-color: #d6ebff;
-    --shadow: rgba(74, 144, 226, 0.15);
+    --border-color: #e0e0e0;
+    --shadow: rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -168,7 +168,7 @@ body {
 
 body.day-theme .app-window {
     background: #ffffff;
-    box-shadow: 0 30px 80px rgba(74, 144, 226, 0.2), 0 0 0 1px rgba(74, 144, 226, 0.1);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .window-header {
@@ -180,8 +180,8 @@ body.day-theme .app-window {
 }
 
 body.day-theme .window-header {
-    background: #f0f8ff;
-    border-bottom: 1px solid #d6ebff;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .window-dots {
@@ -316,8 +316,8 @@ body.day-theme .window-content {
 }
 
 body.day-theme .input-section input {
-    background: #f8fbff;
-    border: 1px solid #d6ebff;
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
     color: var(--text-primary);
 }
 
@@ -420,8 +420,8 @@ body.day-theme .input-section input:focus {
 }
 
 body.day-theme .variation-card {
-    background: #f8fbff;
-    border: 1px solid #d6ebff;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
 }
 
 .variation-card::before {
@@ -1083,7 +1083,7 @@ html {
 
 body.day-theme .demo-text-editor {
     background: #ffffff;
-    box-shadow: 0 16px 48px rgba(74, 144, 226, 0.2);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
 }
 
 .demo-editor-bar {
@@ -1096,8 +1096,8 @@ body.day-theme .demo-text-editor {
 }
 
 body.day-theme .demo-editor-bar {
-    background: #f0f8ff;
-    border-bottom: 1px solid #d6ebff;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .demo-editor-title {
@@ -1209,7 +1209,7 @@ body.day-theme .demo-editor-bar {
 
 body.day-theme .demo-keyboard-indicator {
     background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 10px 32px rgba(74, 144, 226, 0.3);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
 }
 
 .demo-keyboard-indicator.demo-keyboard-visible {

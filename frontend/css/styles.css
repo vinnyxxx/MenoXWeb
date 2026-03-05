@@ -68,6 +68,15 @@ body {
     font-weight: 700;
     color: var(--accent-orange);
     letter-spacing: -0.5px;
+    text-decoration: none;
+}
+
+.logo:hover {
+    text-decoration: none;
+}
+
+body.day-theme .logo {
+    color: #1a1a1a;
 }
 
 .nav {

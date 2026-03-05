@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - MenoX Community</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html#top" class="logo">MenoX</a>
+            <nav class="nav">
+                <a href="downloads.html">Download</a>
+                <a href="forum.html">Forum</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Forum Section -->
+    <section id="forum" class="forum" style="padding-top: 80px;">
+        <div class="container">
+            <h2 class="section-title">Community Forum</h2>
+            <p class="forum-subtitle">Share your experience, ask questions, and connect with other MenoX users</p>
+            
+            <div class="forum-container">
+                <div class="forum-threads" id="forum-threads">
+                    <div class="loading">Loading discussions...</div>
+                </div>
+                
+                <div class="forum-new-thread">
+                    <h3>Start a Discussion</h3>
+                    <form id="forum-form">
+                        <input type="text" id="thread-title" placeholder="Discussion title" required maxlength="100">
+                        <textarea id="thread-content" placeholder="Share your thoughts..." required maxlength="1000"></textarea>
+                        <div class="form-actions">
+                            <span class="char-count"><span id="char-count">0</span>/1000</span>
+                            <button type="submit" class="btn btn-primary">Post Discussion</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MenoX</h4>
+                    <p>AI Text Assistant for macOS</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="downloads.html">Download</a>
+                    <a href="forum.html">Forum</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="forum.html">Community Help</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 MenoX. Open Source under MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

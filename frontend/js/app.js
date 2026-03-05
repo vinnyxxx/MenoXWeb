@@ -91,7 +91,7 @@ function initDownload() {
             // Record download stat
             await recordDownload();
             // Start download
-            window.location.href = 'https://menox.us/downloads/MenoX.dmg';
+            window.location.href = downloadBtn.href;
         });
     }
 }

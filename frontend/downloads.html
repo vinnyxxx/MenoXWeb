@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download MenoX - AI Text Assistant for macOS</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .downloads-hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            text-align: center;
+        }
+        
+        .downloads-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        
+        .downloads-hero p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+        
+        .version-badge {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: var(--bg-darker);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .download-main-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-orange);
+            color: var(--bg-darker);
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .download-main-btn:hover {
+            background: #ffa726;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 152, 0, 0.3);
+        }
+        
+        .download-main-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .release-section {
+            padding: 80px 0;
+            background: var(--bg-darker);
+        }
+        
+        .release-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .release-notes-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .release-entry {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px 32px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+        
+        .release-entry:first-child {
+            border-color: var(--accent-orange);
+        }
+        
+        .release-entry:hover {
+            border-color: var(--accent-orange);
+        }
+        
+        .release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .release-header:hover {
+            opacity: 0.85;
+        }
+        
+        .release-entry.expanded .release-header {
+            margin-bottom: 16px;
+        }
+        
+        .release-toggle {
+            font-size: 18px;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+            margin-left: 12px;
+        }
+        
+        .release-entry.expanded .release-toggle {
+            transform: rotate(90deg);
+        }
+        
+        .release-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .release-entry.expanded .release-content {
+            max-height: 2000px;
+        }
+        
+        .release-version {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .release-date {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .release-latest {
+            background: var(--accent-orange);
+            color: var(--bg-darker);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 12px;
+        }
+        
+        .release-content-inner {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+            padding-top: 4px;
+        }
+        
+        .release-content-inner ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .release-content-inner li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        
+        .release-content-inner li::before {
+            content: "•";
+            color: var(--accent-orange);
+            position: absolute;
+            left: 0;
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .error-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .downloads-hero h1 {
+                font-size: 36px;
+            }
+            
+            .release-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .release-entry {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">MenoX</a>
+            <nav class="nav">
+                <a href="downloads.html">Download</a>
+                <a href="forum.html">Forum</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Downloads Hero -->
+    <section class="downloads-hero">
+        <div class="container">
+            <div class="version-badge" id="latest-version">Loading...</div>
+            <h1>Download MenoX</h1>
+            <p>AI Text Assistant for macOS</p>
+            <a href="#" class="download-main-btn" id="download-btn" onclick="if(this.href.endsWith('#')){event.preventDefault();alert('Loading download link...');}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download for macOS
+            </a>
+        </div>
+    </section>
+
+    <!-- Release Notes Section -->
+    <section class="release-section">
+        <div class="container">
+            <h2>Release Notes</h2>
+            <div class="release-notes-container" id="release-notes">
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Loading release notes...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MenoX</h4>
+                    <p>AI Text Assistant for macOS</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="downloads.html">Download</a>
+                    <a href="forum.html">Forum</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="forum.html">Community Help</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 MenoX. Open Source under MIT License.</p>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">Build: 2026-01-23T08:05:58Z</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Fetch latest version info and update download link
+        async function loadLatestVersion() {
+            const downloadBtn = document.getElementById('download-btn');
+            const versionBadge = document.getElementById('latest-version');
+            
+            const urls = [
+                'https://menox.us/release/latest.json',  // Production S3
+                '../latest.json',                         // Local development
+                '/latest.json'                            // Alternative local path
+            ];
+            
+            for (const url of urls) {
+                try {
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('Loaded version info from:', url);
+                        
+                        // Update download button
+                        downloadBtn.href = `https://menox.us/downloads/${data.filename}`;
+                        downloadBtn.setAttribute('download', data.filename);
+                        
+                        // Update version badge
+                        versionBadge.textContent = `Version ${data.version}`;
+                        
+                        return data;
+                    }
+                } catch (e) {
+                    console.log('Failed to load version info from:', url);
+                }
+            }
+            
+            // Fallback to default
+            console.log('Using fallback download link');
+            downloadBtn.href = 'https://menox.us/downloads/MenoX.dmg';
+            downloadBtn.setAttribute('download', 'MenoX.dmg');
+            versionBadge.textContent = 'Latest';
+            return null;
+        }
+        
+        // Fetch and parse release notes
+        async function loadReleaseNotes() {
+            const container = document.getElementById('release-notes');
+            
+            // URLs to try in order
+            const urls = [
+                'https://menox.us/release/RELEASE_NOTES.md',  // Production S3
+                '../RELEASE_NOTES.md',                         // Local development
+                '/RELEASE_NOTES.md'                            // Alternative local path
+            ];
+            
+            let markdown = null;
+            
+            for (const url of urls) {
+                try {
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        markdown = await response.text();
+                        console.log('Loaded release notes from:', url);
+                        break;
+                    }
+                } catch (e) {
+                    console.log('Failed to load from:', url);
+                }
+            }
+            
+            if (!markdown) {
+                container.innerHTML = `
+                    <div class="error-state">
+                        <p>Unable to load release notes.</p>
+                        <p style="font-size: 13px; margin-top: 8px;">Please try again later.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const releases = parseReleaseNotes(markdown);
+                
+                if (releases.length === 0) {
+                    container.innerHTML = '<div class="error-state">No release notes available.</div>';
+                    return;
+                }
+                
+                // Find the latest major version
+                const latestMajor = getLatestMajor(releases);
+                
+                // Group releases: latest major shown individually, older majors grouped
+                const { currentReleases, olderGroups } = groupReleases(releases, latestMajor);
+                
+                let html = '';
+                
+                // Render current major version releases - always visible, no collapse
+                html += currentReleases.map((release, index) => `
+                    <div class="release-entry expanded" style="cursor: default;">
+                        <div class="release-header" style="cursor: default; margin-bottom: 16px;">
+                            <div>
+                                <span class="release-version">${release.version}</span>
+                                ${index === 0 ? '<span class="release-latest">Latest</span>' : ''}
+                            </div>
+                            <span class="release-date">${release.date}</span>
+                        </div>
+                        <div class="release-content" style="max-height: none;">
+                            <div class="release-content-inner">
+                                <ul>
+                                    ${release.changes.map(change => `<li>${escapeHtml(change)}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Render older major version groups
+                for (const group of olderGroups) {
+                    html += `
+                    <div class="release-entry release-group" onclick="this.classList.toggle('expanded')">
+                        <div class="release-header">
+                            <div>
+                                <span class="release-version">${group.label} <span style="font-size: 14px; color: var(--text-muted); font-weight: 400;">(${group.releases.length} releases)</span></span>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span class="release-date">${group.dateRange}</span>
+                                <span class="release-toggle">›</span>
+                            </div>
+                        </div>
+                        <div class="release-content">
+                            <div class="release-content-inner">
+                                ${group.releases.map(release => `
+                                    <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                            <strong style="color: var(--text-primary); font-size: 14px;">${release.version}</strong>
+                                            <span style="font-size: 12px; color: var(--text-muted);">${release.date}</span>
+                                        </div>
+                                        <ul>
+                                            ${release.changes.map(change => `<li>${escapeHtml(change)}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+                
+                container.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Error parsing release notes:', error);
+                container.innerHTML = `
+                    <div class="error-state">
+                        <p>Unable to load release notes.</p>
+                        <p style="font-size: 13px; margin-top: 8px;">Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Initialize
+        async function init() {
+            await loadLatestVersion();
+            await loadReleaseNotes();
+        }
+        
+        // Get major version number (e.g., "Version 3.0.1" → "3")
+        function getMajor(version) {
+            const match = version.match(/(\d+)\.\d+/);
+            return match ? match[1] : '0';
+        }
+        
+        // Get latest major version from releases
+        function getLatestMajor(releases) {
+            return releases.length > 0 ? getMajor(releases[0].version) : '0';
+        }
+        
+        // Group releases: latest major individually, older majors grouped
+        function groupReleases(releases, latestMajor) {
+            const currentReleases = [];
+            const olderMap = {};
+            
+            for (const release of releases) {
+                const major = getMajor(release.version);
+                if (major === latestMajor) {
+                    currentReleases.push(release);
+                } else {
+                    if (!olderMap[major]) olderMap[major] = [];
+                    olderMap[major].push(release);
+                }
+            }
+            
+            // Convert older groups to array, sorted by major version descending
+            const olderGroups = Object.keys(olderMap)
+                .sort((a, b) => parseInt(b) - parseInt(a))
+                .map(major => {
+                    const groupReleases = olderMap[major];
+                    const firstDate = groupReleases[groupReleases.length - 1].date;
+                    const lastDate = groupReleases[0].date;
+                    return {
+                        label: `Version ${major}.x`,
+                        dateRange: firstDate && lastDate ? `${firstDate} — ${lastDate}` : '',
+                        releases: groupReleases
+                    };
+                });
+            
+            return { currentReleases, olderGroups };
+        }
+        
+        // Parse markdown release notes into structured data
+        function parseReleaseNotes(markdown) {
+            const releases = [];
+            const lines = markdown.split('\n');
+            let currentRelease = null;
+            
+            for (const line of lines) {
+                // Match version headers: ## Version X.X.X - Date
+                const versionMatch = line.match(/^## Version\s+([\d.]+)\s*-?\s*(.*)$/);
+                if (versionMatch) {
+                    if (currentRelease) {
+                        releases.push(currentRelease);
+                    }
+                    currentRelease = {
+                        version: `Version ${versionMatch[1]}`,
+                        date: versionMatch[2].trim() || '',
+                        changes: []
+                    };
+                    continue;
+                }
+                
+                // Match bullet points
+                const bulletMatch = line.match(/^-\s+(.+)$/);
+                if (bulletMatch && currentRelease) {
+                    currentRelease.changes.push(bulletMatch[1].trim());
+                }
+            }
+            
+            // Don't forget the last release
+            if (currentRelease) {
+                releases.push(currentRelease);
+            }
+            
+            return releases;
+        }
+        
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Load on page ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

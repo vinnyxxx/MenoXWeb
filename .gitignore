@@ -47,3 +47,9 @@ lerna-debug.log*
 # 临时文件
 *.tmp
 *.temp
+
+# Release files (managed via S3, not git)
+RELEASE_NOTES.md
+latest.json
+frontend/RELEASE_NOTES.md
+frontend/latest.json

@@ -66,6 +66,14 @@ export class FrontendStack extends cdk.Stack {
           compress: false, // 不压缩二进制文件
           allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD,
         },
+        // /release/* 路径使用下载桶（用于 release notes）
+        '/release/*': {
+          origin: origins.S3BucketOrigin.withOriginAccessControl(this.downloadsBucket),
+          viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+          cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED, // 不缓存，确保最新
+          compress: true,
+          allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD,
+        },
       },
       domainNames: ['menox.us', 'www.menox.us'],
       certificate: certificate,

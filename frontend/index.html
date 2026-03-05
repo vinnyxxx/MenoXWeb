@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MenoX - AI Text Assistant for macOS</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="src/animated-demo/animated-demo.css">
+    <link rel="stylesheet" href="src/unified-demo/unified-demo.css">
 </head>
-<body>
+<body id="top">
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="logo">MenoX</div>
+            <a href="index.html" class="logo">MenoX</a>
             <nav class="nav">
-                <a href="#features">Features</a>
-                <a href="#download">Download</a>
-                <a href="#forum">Forum</a>
+                <a href="downloads.html">Download</a>
+                <a href="forum.html">Forum</a>
             </nav>
         </div>
     </header>
@@ -24,240 +23,159 @@
     <section class="hero">
         <div class="container">
             <h1 class="hero-title">AI Text Assistant<br>for macOS</h1>
-            <p class="hero-subtitle">Select any text, press Cmd+`, and get instant AI-powered suggestions with multiple variations.</p>
+            <p class="hero-subtitle">Select any text, press Cmd+`, and get instant AI-powered suggestions. Everything is automatically saved to your Scratchpad for learning.</p>
             <div class="hero-buttons">
-                <a href="#download" class="btn btn-primary">Download for macOS</a>
+                <a href="#" class="btn btn-primary" id="hero-download-btn" onclick="if(this.href.endsWith('#')){event.preventDefault();window.location.href='downloads.html';}">Download for macOS</a>
                 <a href="#features" class="btn btn-secondary">Learn More</a>
             </div>
-            
-            <!-- Animated Demo Area -->
-            <div class="hero-demo" data-demo-animation="true">
-                <!-- Text Editor (left side - simulates any app) -->
-                <div class="demo-text-editor">
-                    <div class="demo-editor-bar">
-                        <div class="window-dots">
-                            <span></span><span></span><span></span>
+
+            <!-- Unified Demo -->
+            <div class="ud-demo">
+                <!-- Phase 1: Article + AI Assistant -->
+                <div class="ud-editor">
+                    <div class="ud-text-ed">
+                        <div class="ud-bar">
+                            <div class="window-dots"><span></span><span></span><span></span></div>
+                            <span class="ud-bar-title">Article — Safari</span>
                         </div>
-                        <span class="demo-editor-title">Email Draft — Mail</span>
+                        <div class="ud-body">
+                            <p><span class="ud-select">Transformer models have revolutionized natural language processing by replacing recurrent layers with self-attention mechanisms. Unlike RNNs, transformers process all tokens in parallel, allowing them to capture long-range dependencies more efficiently. The key innovation is the attention mechanism, which computes weighted relationships between every pair of tokens in a sequence.</span></p>
+                        </div>
                     </div>
-                    <div class="demo-editor-body">
-                        <div class="demo-email-header">
-                            <div class="demo-email-field"><span class="demo-field-label">To:</span> team@company.com</div>
-                            <div class="demo-email-field"><span class="demo-field-label">Subject:</span> Project Update</div>
+
+                    <div class="demo-keyboard-indicator" id="kb-cmd">
+                        <span class="demo-key">⌘</span>
+                        <span class="demo-key-plus">+</span>
+                        <span class="demo-key">`</span>
+                    </div>
+
+                    <div class="ud-ai">
+                        <div class="ud-bar">
+                            <div class="window-dots"><span></span><span></span><span></span></div>
                         </div>
-                        <div class="demo-email-content">
-                            <p>Hi Team,</p>
-                            <p>Here's the update. <span class="demo-text-selection" data-animation-target="text-selection"><span class="demo-original-text">Send me the report ASAP.</span><span class="demo-replacement-text">Could you please send me the report at your earliest convenience?</span></span></p>
-                            <p>Thanks</p>
+                        <div class="ud-ai-body">
+                            <div class="ud-chat">
+                                <div class="ud-msg ud-msg-1">
+                                    <div class="ud-avatar">✨</div>
+                                    <div class="ud-bubble">I see you selected a passage about transformer architecture. How can I help?</div>
+                                </div>
+                                <div class="ud-msg ud-user ud-msg-2">
+                                    <div class="ud-avatar" style="background:rgba(74,158,255,0.3);font-size:11px;">You</div>
+                                    <div class="ud-bubble">What's the difference between self-attention and cross-attention?</div>
+                                </div>
+                                <div class="ud-msg ud-msg-3">
+                                    <div class="ud-avatar">✨</div>
+                                    <div class="ud-bubble">Self-attention computes relationships within the same sequence — each token attends to all others. Cross-attention connects two different sequences, like in encoder-decoder models where the decoder attends to encoder outputs.</div>
+                                </div>
+                            </div>
+                            <div class="ud-input-area">
+                                <input type="text" class="ud-real-input" value="" placeholder="Ask about the selected text..." readonly>
+                                <button class="ud-send">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                        <path d="M2 10L18 2L10 18L8 11L2 10Z" fill="currentColor"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Keyboard Indicator (floats over) -->
-                <div class="demo-keyboard-indicator" data-animation-target="keyboard-indicator">
-                    <span class="demo-key">⌘</span>
+                <!-- Ctrl+` keyboard — at ud-demo level, not inside ud-editor -->
+                <div class="demo-keyboard-indicator" id="kb-ctrl">
+                    <span class="demo-key">Ctrl</span>
                     <span class="demo-key-plus">+</span>
                     <span class="demo-key">`</span>
                 </div>
 
-                <!-- MenoX App Window (right side - the actual app) -->
-                <div class="app-window demo-app-window" data-animation-target="app-window">
-                    <div class="window-header">
-                        <div class="window-dots">
-                            <span></span><span></span><span></span>
-                        </div>
+                <!-- Phase 2: Scratchpad -->
+                <div class="ud-pad">
+                    <div class="ud-toolbar">
+                        <div class="ud-dots"><span></span><span></span><span></span></div>
+                        <span class="ud-tab">Copy All</span>
+                        <span class="ud-tab">Export</span>
+                        <span class="ud-sep"></span>
+                        <span class="ud-tab" data-tab="summary">✦ Summary</span>
+                        <span class="ud-tab" data-tab="learn">Learn</span>
+                        <span class="ud-tab" data-tab="map">Map</span>
                     </div>
-                    <div class="window-content">
-                        <!-- Chat Section -->
-                        <div class="chat-section">
-                            <div class="ai-message demo-ai-greeting" data-animation-target="ai-greeting">
-                                <div class="ai-avatar">✨</div>
-                                <div class="message-content">
-                                    <div class="message-sender">AI Assistant</div>
-                                    <div class="message-text">I can help you with the selected text. What would you like me to do?</div>
-                                    <div class="message-time">9:32 PM</div>
-                                </div>
-                            </div>
-                            
-                            <div class="ai-message demo-ai-response" data-animation-target="ai-response">
-                                <div class="ai-avatar">✨</div>
-                                <div class="message-content">
-                                    <div class="message-sender">AI Assistant</div>
-                                    <div class="message-text">Here are three polite alternatives for your message:</div>
-                                    <div class="message-time">9:33 PM</div>
-                                </div>
+                    <div class="ud-content">
+                        <div class="ud-doc">
+                            <div class="ud-doc-date">📄 Today — Jan 23, 2026</div>
+                            <div class="ud-doc-text">
+                                Transformer models have revolutionized natural language processing by replacing recurrent layers with self-attention mechanisms. Unlike RNNs, transformers process all tokens in parallel, allowing them to capture long-range dependencies more efficiently. The key innovation is the attention mechanism, which computes weighted relationships between every pair of tokens in a sequence.
                             </div>
                         </div>
+                        <div class="ud-panel">
+                            <!-- Summary -->
+                            <div class="ud-summary">
+                                <div class="ud-stitle">✦ AI Summary</div>
+                                <h3>Transformer Architecture Overview</h3>
+                                <h4>Key Points</h4>
+                                <ul>
+                                    <li>Transformers replaced <span class="ud-bold">recurrent layers (RNNs)</span> with self-attention</li>
+                                    <li>All tokens are processed <span class="ud-bold">in parallel</span>, not sequentially</li>
+                                    <li><span class="ud-bold">Long-range dependencies</span> are captured more efficiently</li>
+                                    <li>Attention computes <span class="ud-bold">weighted relationships</span> between all token pairs</li>
+                                </ul>
+                                <h4>Why It Matters</h4>
+                                <p>This parallel processing enables <span class="ud-bold">faster training</span> and better performance on tasks like translation, summarization, and text generation.</p>
+                            </div>
 
-                        <!-- Input Section -->
-                        <div class="input-section">
-                            <input type="text" placeholder="Ask about the selected text..." readonly>
-                            <button class="send-btn">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                    <path d="M2 10L18 2L10 18L8 11L2 10Z" fill="currentColor"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <!-- Quick Actions -->
-                        <div class="quick-actions">
-                            <button class="action-btn demo-quick-action" data-animation-target="quick-action">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 11l3 3L22 4"/>
-                                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-                                </svg>
-                                Improve Writing
-                            </button>
-                            <button class="action-btn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                    <path d="M9 9h6M9 15h6"/>
-                                </svg>
-                                Make Professional
-                            </button>
-                            <button class="more-btn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="1"/>
-                                    <circle cx="12" cy="5" r="1"/>
-                                    <circle cx="12" cy="19" r="1"/>
-                                </svg>
-                                <span>More</span>
-                            </button>
-                        </div>
-
-                        <!-- AI Variations -->
-                        <div class="variations-section demo-variations" data-animation-target="variations">
-                            <div class="variation-card demo-variation-1" data-animation-target="variation-1">
-                                <div class="variation-icon">📄</div>
-                                <div class="variation-label">Option 1</div>
-                                <div class="variation-text">Could you please send me the report at your earliest convenience?</div>
-                                <div class="variation-actions">
-                                    <button class="copy-btn">Copy</button>
-                                    <button class="replace-btn demo-replace-btn" data-animation-target="replace-btn">Replace</button>
+                            <!-- Learn -->
+                            <div class="ud-learn">
+                                <div class="ud-lsec">
+                                    <div class="ud-lhead">💡 Reading Tips</div>
+                                    <div class="ud-ltip">This text uses ML/AI technical vocabulary. Understanding "attention," "tokens," and "dependencies" is essential for reading deep learning papers.</div>
+                                    <div class="ud-ltip">Notice the comparison structure: "Unlike RNNs, transformers..." — a common academic pattern to highlight innovation.</div>
+                                </div>
+                                <div class="ud-lsec">
+                                    <div class="ud-lhead">🔤 Phrases &amp; Patterns (2)</div>
+                                    <div class="ud-phrase">
+                                        <div class="ud-pw">long-range dependencies</div>
+                                        <div class="ud-pd">relationships between elements far apart in a sequence</div>
+                                        <div class="ud-pp">Compound adjective + noun — common in ML literature to describe distant token relationships</div>
+                                        <div class="ud-pe">e.g. Capturing long-range dependencies is crucial for understanding context in language.</div>
+                                    </div>
+                                    <div class="ud-phrase">
+                                        <div class="ud-pw">self-attention mechanism</div>
+                                        <div class="ud-pd">a method where each element in a sequence relates to all other elements</div>
+                                        <div class="ud-pp">Technical compound noun — "self-" prefix indicates the operation is within the same input</div>
+                                        <div class="ud-pe">e.g. The self-attention mechanism allows the model to weigh the importance of each word.</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="variation-card demo-variation-2" data-animation-target="variation-2">
-                                <div class="variation-icon">📄</div>
-                                <div class="variation-label">Option 2</div>
-                                <div class="variation-text">When you have a moment, could you share the report with me?</div>
-                                <div class="variation-actions">
-                                    <button class="copy-btn">Copy</button>
-                                    <button class="replace-btn">Replace</button>
-                                </div>
-                            </div>
-                            <div class="variation-card demo-variation-3" data-animation-target="variation-3">
-                                <div class="variation-icon">📄</div>
-                                <div class="variation-label">Option 3</div>
-                                <div class="variation-text">I'd appreciate it if you could send the report when possible.</div>
-                                <div class="variation-actions">
-                                    <button class="copy-btn">Copy</button>
-                                    <button class="replace-btn">Replace</button>
+
+                            <!-- Maps -->
+                            <div class="ud-maps">
+                                <svg class="ud-map-svg" id="ud-map-svg"></svg>
+                                <div class="ud-node ud-center" id="node-transformer" style="top:40%;left:34%;">Transformer</div>
+                                <div class="ud-node ud-node-click" id="node-self-attention" style="top:10%;left:8%;">Self-Attention</div>
+                                <div class="ud-node" id="node-parallelism" style="top:12%;left:66%;">Parallelism</div>
+                                <div class="ud-node" id="node-rnn" style="top:68%;left:4%;">RNN / LSTM</div>
+                                <div class="ud-node" id="node-tokens" style="top:70%;left:62%;">Token Relations</div>
+
+                                <div class="ud-mlabel" style="top:28%;left:16%;">uses</div>
+                                <div class="ud-mlabel" style="top:26%;left:58%;">enables</div>
+                                <div class="ud-mlabel" style="top:56%;left:14%;">replaces</div>
+                                <div class="ud-mlabel" style="top:58%;left:54%;">computes</div>
+
+                                <div class="ud-card" style="top:4%;left:28%;">
+                                    <div class="ud-card-tag">Deep Learning</div>
+                                    <h4>Self-Attention</h4>
+                                    <p>Each token computes attention scores with every other token, capturing contextual relationships regardless of distance.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Key Features</h2>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⌨️</div>
-                    <h3>Global Hotkey</h3>
-                    <p>Press <code>Cmd+`</code> anywhere to trigger the AI assistant with your selected text.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">✨</div>
-                    <h3>Multiple AI Models</h3>
-                    <p>Choose from Claude, Llama, Titan, and other AWS Bedrock models.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Replace Text</h3>
-                    <p>Click to copy or use "Replace Selected Text" to update your original text.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>Chat Interface</h3>
-                    <p>Have a conversation with AI about your selected text.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
-                    <h3>Secure Storage</h3>
-                    <p>Optional Keychain storage for encrypted API key protection.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section id="download" class="download">
-        <div class="container">
-            <h2 class="section-title">Download MenoX</h2>
-            <div class="download-card">
-                <div class="download-info">
-                    <h3>MenoX v1.0</h3>
-                    <p>For macOS 13.0 (Ventura) or later</p>
-                    <ul class="download-features">
-                        <li>✓ Apple Silicon (M1/M2/M3) & Intel</li>
-                        <li>✓ Notarized by Apple</li>
-                        <li>✓ Open Source (MIT License)</li>
-                    </ul>
-                    <div class="download-stats">
-                        <span class="stat-label">Total Downloads:</span>
-                        <span class="stat-value" id="download-count">Loading...</span>
-                    </div>
-                </div>
-                <div class="download-actions">
-                    <a href="#" id="download-btn" class="btn btn-primary btn-large">
-                        Download DMG
-                    </a>
-                    <p class="download-note">2.0 MB • Free & Open Source</p>
-                </div>
-            </div>
-            
-            <div class="requirements">
-                <h4>Requirements</h4>
-                <ul>
-                    <li>macOS 13.0 (Ventura) or later</li>
-                    <li>AWS account with Bedrock access</li>
-                    <li>Internet connection</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Forum Section -->
-    <section id="forum" class="forum">
-        <div class="container">
-            <h2 class="section-title">Community Forum</h2>
-            <p class="forum-subtitle">Share your experience, ask questions, and connect with other MenoX users</p>
-            
-            <div class="forum-container">
-                <div class="forum-threads" id="forum-threads">
-                    <div class="loading">Loading discussions...</div>
-                </div>
-                
-                <div class="forum-new-thread">
-                    <h3>Start a Discussion</h3>
-                    <form id="forum-form">
-                        <input type="text" id="thread-title" placeholder="Discussion title" required maxlength="100">
-                        <textarea id="thread-content" placeholder="Share your thoughts..." required maxlength="1000"></textarea>
-                        <div class="form-actions">
-                            <span class="char-count"><span id="char-count">0</span>/1000</span>
-                            <button type="submit" class="btn btn-primary">Post Discussion</button>
-                        </div>
-                    </form>
+                <!-- Progress Bar -->
+                <div class="ud-progress">
+                    <div class="ud-progress-step ud-step-active" data-step="chat">AI Chat</div>
+                    <div class="ud-progress-step" data-step="scratchpad">Scratchpad</div>
+                    <div class="ud-progress-step" data-step="summary">Summary</div>
+                    <div class="ud-progress-step" data-step="learn">Learn</div>
+                    <div class="ud-progress-step" data-step="map">Maps</div>
                 </div>
             </div>
         </div>
@@ -273,23 +191,50 @@
                 </div>
                 <div class="footer-section">
                     <h4>Resources</h4>
-                    <a href="https://github.com/yourusername/menox">GitHub</a>
-                    <a href="#download">Download</a>
-                    <a href="#forum">Forum</a>
+                    <a href="downloads.html">Download</a>
+                    <a href="forum.html">Forum</a>
                 </div>
                 <div class="footer-section">
                     <h4>Support</h4>
-                    <a href="https://github.com/yourusername/menox/issues">Report Issue</a>
-                    <a href="#forum">Community Help</a>
+                    <a href="forum.html">Community Help</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 MenoX. Open Source under MIT License.</p>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">Build: 2026-02-23T00:10:55Z</p>
             </div>
         </div>
     </footer>
 
     <script src="js/app.js"></script>
-    <script src="src/animated-demo/animated-demo-bundle.js"></script>
+    <script src="src/unified-demo/unified-demo.js"></script>
+    <script>
+        // Update hero download button with latest version
+        (async function() {
+            const downloadBtn = document.getElementById('hero-download-btn');
+            if (!downloadBtn) return;
+            
+            const urls = [
+                'https://menox.us/release/latest.json',
+                '../latest.json',
+                '/latest.json'
+            ];
+            
+            for (const url of urls) {
+                try {
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        const data = await response.json();
+                        downloadBtn.href = `https://menox.us/downloads/${data.filename}`;
+                        downloadBtn.download = data.filename;
+                        console.log('Updated download link to:', data.filename);
+                        return;
+                    }
+                } catch (e) {
+                    // Continue to next URL
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
